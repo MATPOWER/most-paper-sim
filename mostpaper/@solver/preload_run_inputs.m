@@ -54,7 +54,6 @@ if r{1} == 1 && r{2} == 1
 
 	mpopt1 = mpoption('verbose', 2, 'out.all', 1);
 	mpopt1 = mpoption(mpopt1, 'opf.violation', 5e-7);
-	mpopt1 = mpoption(mpopt1, 'most.security_constraints', 1);
 	mpopt1 = mpoption(mpopt1, 'most.solver', 'GUROBI');
 
 	mpopt1 = mpoption(mpopt1, 'gurobi.opts.Method', 2);
@@ -65,7 +64,6 @@ if r{1} == 1 && r{2} == 1
 	%--------------------------------------------------------------------
 	mpopt2 = mpoption('verbose', 0, 'out.all', 0);
 	mpopt2 = mpoption(mpopt2, 'opf.violation', 5e-7);
-	mpopt2 = mpoption(mpopt2, 'most.security_constraints', 1);
 	mpopt2 = mpoption(mpopt2, 'most.solver', 'GUROBI');
 
 	%mpopt2 = mpoption(mpopt2, 'cplex.opts.threads', num_threads);
