@@ -52,7 +52,6 @@ At the MATLAB prompt, type:
     >> sim = mostpaper().run('testsim9');
 
 
-
 Running the Simulations
 -----------------------
 
@@ -61,9 +60,15 @@ At the MATLAB prompt, type:
     >> sim = mostpaper().run('sim118');
 
 
+License and Terms of Use
+------------------------
+
+The MOST Paper Simulations code is distributed as open-source under the [3-clause BSD license][6].
+
 
 [1]: http://www.pserc.cornell.edu/matpower
 [2]: https://github.com/MATPOWER/most
 [3]: https://github.com/MATPOWER/mpsim
 [4]: http://www.gurobi.com
 [5]: https://www.mathworks.com
+[6]: LICENSE
