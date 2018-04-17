@@ -53,7 +53,7 @@ num_threads = 6;  %laptop, raptor
 if r{1} == 1 && r{2} == 1
 
 	mpopt1 = mpoption('verbose', 2, 'out.all', 1);
-	mpopt1 = mpoption(mpopt1, 'opf.violation', 5e-7, 'pdipm.comptol', 5e-8);
+	mpopt1 = mpoption(mpopt1, 'opf.violation', 5e-7);
 	mpopt1 = mpoption(mpopt1, 'most.security_constraints', 1);
 	mpopt1 = mpoption(mpopt1, 'most.solver', 'GUROBI');
 
@@ -64,7 +64,7 @@ if r{1} == 1 && r{2} == 1
 	mpopt1 = mpoption(mpopt1, 'gurobi.opts.ConcurrentMIP', 4);
 	%--------------------------------------------------------------------
 	mpopt2 = mpoption('verbose', 0, 'out.all', 0);
-	mpopt2 = mpoption(mpopt2, 'opf.violation', 5e-7, 'pdipm.comptol', 5e-8);
+	mpopt2 = mpoption(mpopt2, 'opf.violation', 5e-7);
 	mpopt2 = mpoption(mpopt2, 'most.security_constraints', 1);
 	mpopt2 = mpoption(mpopt2, 'most.solver', 'GUROBI');
 
@@ -121,8 +121,7 @@ elseif r{1} == 2
 	%--------------------------------------------------------------------
 	mpopt2f = mpoption('opf.dc.solver', 'GUROBI', 'verbose', 0, 'out.all', 0);
 	mpopt2f = mpoption(mpopt2f, 'model', 'DC');
-	mpopt2f = mpoption(mpopt2f, 'opf.violation', 5e-7); %, 'pdipm.comptol', 5e-8);
-	%mpopt2f = mpoption(mpopt2f, 'pdipm.max_it', 50000);
+	mpopt2f = mpoption(mpopt2f, 'opf.violation', 5e-7);
 	mpopt2f = mpoption(mpopt2f, 'sopf.force_Pc_eq_P0', 0);   %% constrain contracted == base case dispatch
 	%mpopt2f = mpoption(mpopt2f, 'cplex.lpmethod', 3);% network simplex
 	%mpopt2f = mpoption(mpopt2f, 'cplex.qpmethod', 3);% network simplex
