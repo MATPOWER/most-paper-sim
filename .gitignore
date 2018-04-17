@@ -1,0 +1,9 @@
+sim_data/sim118/inputs/mpsd_data
+sim_data/sim118/outputs/*
+sim_data/sim118/sim118_default*
+sim_data/sim118/work
+sim_data/testsim9/inputs/mpsd_data
+sim_data/testsim9/outputs/*
+sim_data/testsim9/sim118_default*
+sim_data/testsim9/work
+untracked
