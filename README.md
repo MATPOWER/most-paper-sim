@@ -39,7 +39,7 @@ Before you can run these simulations, you will need to do the following steps to
 
 4. Install [MP-Sim][3].
 
-5. Download (or clone) this repository and add the `mostpaper` sub-directory to your MATLAB path.
+5. Download (or clone) this repository and add the `lib` sub-directory to your MATLAB path (but not it's sub-directories).
 
 6. Put the contents of the `sim_data` sub-directory in the MP-Sim `<INPUTDIR>` specified in the (optional) Step 4 of the MP-Sim installation. By default this is `<MPSIM>/sim_data`, where `<MPSIM>` refers to the location where you installed MP-Sim.
 
