@@ -108,3 +108,16 @@ mpc.genfuel(mpc.icoal, 1) = {'coal'};
 mpc.genfuel(mpc.ing, 1) = {'ng'};
 mpc.genfuel(mpc.ioil, 1) = {'oil'};
 mpc.genfuel(mpc.ilo, 1) = {'na'};
+
+mpc.fuelname={
+    'coal'
+    'hydro'
+    'na'
+    'ng'
+    'ngcc'
+    'syncgen'
+    'nuke'
+    'wind'
+    'oil'
+    'ess'
+};

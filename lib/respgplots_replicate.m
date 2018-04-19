@@ -11,7 +11,7 @@ function respgplots_replicate(simname, configf, theta_info)
 % Alberto J. Lamadrid
 
 %simnameroot = 'tr_c118_500ucr';      % base directory
-outputdir = sprintf('%s%s/', configf.outputs, simname);
+outputdir = sprintf('%s%s/outputs/', configf.outputs, simname);
 %dprefix = '/Volumes/Drive 2/shares/alberto/';  % location where plot will be saved
 plotname = 'respg';                 % name of plot, dispatch
 plotname2 = 'resgmax';              % name of plot, max dispatch
@@ -46,7 +46,7 @@ vval = [10e4;
 nOut = 17;
 %% -- stochastic info --
 ct1 = 1;
-simname = sprintf('%s%s', simnameroot, simnamesct{1});
+%simname = sprintf('%s%s', simnameroot, simnamesct{1});
 [outArgs{1:nOut}] = dirstruct(configf, simname);
 
 [savefiledirs1, savefiles1, savefiledirs2, savefiles2, savefileresds1, ...
@@ -57,7 +57,7 @@ simname = sprintf('%s%s', simnameroot, simnamesct{1});
 s1r = load(savefileplots1);
 s2r = load(savefileress2);
 s1b = load(savefiles1);
-mpc = s1b.mpsd.mpc;
+mpc = s1b.second_stage.mpsd.mpc;
 
 [a, infops2{ct1}, infols2{ct1}] = revenuef(mpc, s2r, 'savepath', savefileplots1, 'saveit', true, 'savename1', 'Cost-area2.pdf', ...
     'savename2', 'pg-area2.pdf', 'savename3', 'maxcap2.pdf');
@@ -106,6 +106,8 @@ for ct1 = 1:theta_len
   pgresd2(ct1, :) = sum(infopd2{ct1}.pgarea2s2, 1);% deterministic dispatch
  
 % reserves
+  %savefiles1f = sprintf('%s%s/%s_default2_%3.3i/%s/workdir/stage1/000/results_fr_000', ...
+  %  configf.outputs, simname, simname, scale_1_dir, simname);
   s1b = load(savefiles1f);
   s1r = load(savefileress1f);
 
@@ -128,12 +130,16 @@ h = bar(infobar, 'stacked');
 ax = axis;
 ax(2) = 1.6; %Change axis limit
 axis(ax);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 title(sprintf('Stochastic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 ylabel('Expected Dispatch by Fuel Type (MWh)', 'FontSize', 16, 'FontName', 'Times New Roman');
@@ -148,12 +154,15 @@ legend(legendfm, 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, pgresd);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
 title(sprintf('Deterministic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 ylabel('Expected Dispatch by Fuel Type (MWh)', 'FontSize', 16, 'FontName', 'Times New Roman');
 %ylabel('E[Dispatch] per fuel type, MWh', 'FontSize', 16, 'FontName', 'Times New Roman');
@@ -180,12 +189,16 @@ ax(2) = 1.6;                        %Change axis limit
 warning('manually fixing axes');
 ax(4) = vval(2);
 axis(ax);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 title(sprintf('Stochastic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 ylabel('M[Dispatch] per fuel type, MWh, 1 set.', 'FontSize', 16, 'FontName', 'Times New Roman');
@@ -196,12 +209,15 @@ legend(infols2{1}.legend, 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, gmresd);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
 ax = axis;
 warning('manually fixing axes');
 ax(4) = vval(2);
@@ -231,11 +247,14 @@ ax(2) = 1.6;                        %Change axis limit
 warning('manually fixing axes');
 ax(4) = vval(2);
 axis(ax);
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 title(sprintf('Stochastic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 ylabel('M[Dispatch] per fuel type, MWh, 1 set.', 'FontSize', 16, 'FontName', 'Times New Roman');
 xlabel('Scaling factor Reserves', 'FontSize', 16, 'FontName', 'Times New Roman');
@@ -246,11 +265,14 @@ legend(legendf(2:end), 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, gmresd(:, 2:end));
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 ax = axis;
 warning('manually fixing axes');
 ax(4) = vval(2);
@@ -280,12 +302,16 @@ ax(2) = 1.6;                        %Change axis limit
 warning('manually fixing axes');
 ax(4) = vval(3);
 axis(ax);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 title(sprintf('Stochastic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 ylabel('Max Committed Capacity by Fuel Type (MW)', 'FontSize', 16, 'FontName', 'Times New Roman');
@@ -297,12 +323,15 @@ legend(legendfm, 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, pmresd(:, 1:end)); % filter wind out, capacity of wind is too large and covers all the others
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
 ax = axis;
 warning('manually fixing axes');
 ax(4) = vval(3);
@@ -333,11 +362,14 @@ ax(2) = 1.6;                        %Change axis limit
 warning('manually fixing axes');
 ax(4) = vval(3);
 axis(ax);
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 %title(sprintf('Stochastic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 title(sprintf('Stochastic'), 'FontSize', 25, 'FontName', 'Times New Roman');
 ylabel('Max Committed Capacity by Fuel Type (MW)', 'FontSize', 22, 'FontName', 'Times New Roman');
@@ -356,11 +388,14 @@ legend(legendf(2:end), 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, pmresd(:, 2:end)); % filter wind out, capacity of wind is too large and covers all the others
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 ax = axis;
 warning('manually fixing axes');
 ax(4) = vval(3);
@@ -384,7 +419,7 @@ eval(sprintf('print -dpdf ''%s''', nom));
 close;
 
 %%-- plot of reserves composition
-nom = sprintf('%sc118%s_stackfres_rep', outputdir plotname4);
+nom = sprintf('%sc118%s_stackfres_rep', outputdir, plotname4);
 fig=figure;
 subplot(1, 2, 1, 'align');          % stochastic
 infobar = resress;
@@ -393,12 +428,15 @@ h = bar(infobar, 'stacked');
 ax = axis;
 ax(2) = 1.6; %Change axis limit
 axis(ax);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
 ax = axis;
 warning('manually fixing axes');
 ax(4) = vval(4);
@@ -417,12 +455,15 @@ legend(legendfm, 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, resresd);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
 ax = axis;
 warning('manually fixing axes');
 ax(4) = vval(4);
@@ -458,11 +499,14 @@ warning('manually fixing axes');
 ax(3) = 0;
 ax(4) = vval(4);
 axis(ax);
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 %title(sprintf('Stochastic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 title(sprintf('Stochastic'), 'FontSize', 25, 'FontName', 'Times New Roman');
 ylabel('Reserve Capacity by Fuel Type (MWh)', 'FontSize', 22, 'FontName', 'Times New Roman');
@@ -478,11 +522,14 @@ legend(legendf(2:end), 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, resresd(:, 2:end));
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 %title(sprintf('Deterministic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 title(sprintf('Deterministic'), 'FontSize', 25, 'FontName', 'Times New Roman');
 ylabel('Reserve Capacity by Fuel Type (MWh)', 'FontSize', 22, 'FontName', 'Times New Roman');
@@ -514,12 +561,16 @@ h = bar(infobar, 'stacked');
 ax = axis;
 ax(2) = 1.6; %Change axis limit
 axis(ax);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 ax = axis;
 warning('manually fixing axes');
@@ -535,12 +586,15 @@ legend(infolrs1{1}.legend, 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, resresd);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
 title(sprintf('Deterministic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 ylabel('Reserves per fuel type, MWh', 'FontSize', 16, 'FontName', 'Times New Roman');
 xlabel('Scaling factor Reserves', 'FontSize', 16, 'FontName', 'Times New Roman');
@@ -564,11 +618,14 @@ h = bar(infobar, 'stacked');
 ax = axis;
 ax(2) = 1.6; %Change axis limit
 axis(ax);
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 ax = axis;
 warning('manually fixing axes');
 ax(3) = 0;
@@ -584,11 +641,14 @@ legend(legendf(2:end), 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, resresd(:, 2:end));
-set(h(1),'FaceColor', color(order(2), :))
-set(h(2),'FaceColor', color(order(3), :))
-set(h(3),'FaceColor', color(order(4), :))
-set(h(4),'FaceColor', color(order(5), :))
-set(h(5),'FaceColor', color(order(6), :))
+for i=2:length(order)
+    set(h(i-1),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(2), :))
+%set(h(2),'FaceColor', color(order(3), :))
+%set(h(3),'FaceColor', color(order(4), :))
+%set(h(4),'FaceColor', color(order(5), :))
+%set(h(5),'FaceColor', color(order(6), :))
 title(sprintf('Deterministic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 ylabel('Reserves per fuel type, MWh', 'FontSize', 16, 'FontName', 'Times New Roman');
 xlabel('Scaling factor Reserves', 'FontSize', 16, 'FontName', 'Times New Roman');
@@ -613,12 +673,16 @@ h = bar(infobar, 'stacked');
 ax = axis;
 ax(2) = 1.6; %Change axis limit
 axis(ax);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 %title(sprintf('Stochastic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 title(sprintf('Stochastic'), 'FontSize', 25, 'FontName', 'Times New Roman');
@@ -636,12 +700,15 @@ legend(legendfm, 'Location', 'Best', 'FontName', 'Times New Roman');
 
 subplot(1, 2, 2, 'align');          % deterministic
 h = area(theta1, pgresd2);
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
 %title(sprintf('Deterministic'), 'FontSize', 17, 'FontName', 'Times New Roman');
 title(sprintf('Deterministic'), 'FontSize', 25, 'FontName', 'Times New Roman');
 ylabel('Expected Dispatch by Fuel Type (MWh)', 'FontSize', 22, 'FontName', 'Times New Roman');

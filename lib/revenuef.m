@@ -79,7 +79,11 @@ if opt.addres                       % user indicated that positive reserves will
 end
 
 lfuels = unique(mpc.genfuel);       % coal, hydro, na, ng, ngcc, nuke, wind
-order = [7, 2, 6, 1, 5, 4];         % wind, hydro, nuke, coal, ngcc, ng(from baseload to peaking)
+if length(lfuels) == 5
+    order = [5, 2, 1, 4];
+else
+    order = [7, 2, 6, 1, 5, 4];         % wind, hydro, nuke, coal, ngcc, ng(from baseload to peaking)
+end
 
 color = [
 [1 0.75 0.15]                       % coal
@@ -111,10 +115,15 @@ for ct1 = 1:ng
     idn(ct1, 2) = strcmp(fuel(ct1, :), 'hydro');
     idn(ct1, 3) = strcmp(fuel(ct1, :), 'na');
     idn(ct1, 4) = strcmp(fuel(ct1, :), 'ng');
-    idn(ct1, 5) = strcmp(fuel(ct1, :), 'ngcc');
-    idn(ct1, 6) = strcmp(fuel(ct1, :), 'nuke');
-    idn(ct1, 7) = strcmp(fuel(ct1, :), 'wind');
-    idn(ct1, 8) = or(strcmp(fuel(ct1, :), 'ESS'), strcmp(fuel(ct1, :), 'Flex ld'));
+    if length(lfuels) > 5
+        idn(ct1, 5) = strcmp(fuel(ct1, :), 'ngcc');
+        idn(ct1, 6) = strcmp(fuel(ct1, :), 'nuke');
+        idn(ct1, 7) = strcmp(fuel(ct1, :), 'wind');
+        idn(ct1, 8) = or(strcmp(fuel(ct1, :), 'ESS'), strcmp(fuel(ct1, :), 'Flex ld'));
+    else
+        idn(ct1, 5) = strcmp(fuel(ct1, :), 'wind');
+        idn(ct1, 6) = or(strcmp(fuel(ct1, :), 'ESS'), strcmp(fuel(ct1, :), 'Flex ld'));
+    end
 end
 for ct1= 1:size(idn, 2)
   cstarear(:, ct1) = sum(cstarea(find(idn(:, ct1)), :), 1)';
@@ -124,21 +133,33 @@ for ct1= 1:size(idn, 2)
   ucpmaxr(:, ct1) = sum(ucpmax(find(idn(:, ct1)), :), 1)';
   pgarears2(:, ct1) = sum(pgareas2(find(idn(:, ct1)), :), 1)';
 end
-lfuelsl = {lfuels{order(1)}, lfuels{order(2)}, lfuels{order(3)}, lfuels{order(4)}, lfuels{order(5)}, lfuels{order(6)}};
-%lfuelsl = {lfuels{order(1)}, lfuels{order(2)}, lfuels{order(3)}, lfuels{order(4)}, lfuels{order(5)}, lfuels{order(6)}, lfuels{order(7)}};
+
+if length(lfuels) > 5
+    lfuelsl = {lfuels{order(1)}, lfuels{order(2)}, lfuels{order(3)}, lfuels{order(4)}, lfuels{order(5)}, lfuels{order(6)}};
+    %lfuelsl = {lfuels{order(1)}, lfuels{order(2)}, lfuels{order(3)}, lfuels{order(4)}, lfuels{order(5)}, lfuels{order(6)}, lfuels{order(7)}};
+else
+    lfuelsl = {lfuels{order(1)}, lfuels{order(2)}, lfuels{order(3)}, lfuels{order(4)}};
+end
 
 trange = [1:nt];                                    % time range to be plotted
-frange = [1:6];                                     % fuel range to be plotted
-cstarea = [cstarear(:, order(1)), cstarear(:, order(2)), cstarear(:, order(3)), cstarear(:, order(4)), cstarear(:, order(5)), cstarear(:, order(6))];
-%cstarea = [cstarear(:, order(1)), cstarear(:, order(2)), cstarear(:, order(3)), cstarear(:, order(4)), cstarear(:, order(5)), cstarear(:, order(6)), cstarear(:, order(7))];
+frange = [1:length(order)];                                     % fuel range to be plotted
+if length(order) > 5
+    cstarea = [cstarear(:, order(1)), cstarear(:, order(2)), cstarear(:, order(3)), cstarear(:, order(4)), cstarear(:, order(5)), cstarear(:, order(6))];
+    %cstarea = [cstarear(:, order(1)), cstarear(:, order(2)), cstarear(:, order(3)), cstarear(:, order(4)), cstarear(:, order(5)), cstarear(:, order(6)), cstarear(:, order(7))];
+else
+    cstarea = [cstarear(:, order(1)), cstarear(:, order(2)), cstarear(:, order(3)), cstarear(:, order(4))];
+end
 figure;
 h = area(cstarea(trange, frange));
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 %v = axis;
 %v(1:2) = [fact(1) fact(end)];
@@ -157,15 +178,23 @@ if opt.saveit
 end
 close;
 
-pgarea2 = [pgarear(:, order(1)), pgarear(:, order(2)), pgarear(:, order(3)), pgarear(:, order(4)), pgarear(:, order(5)), pgarear(:, order(6))];
+if length(order) > 5
+    pgarea2 = [pgarear(:, order(1)), pgarear(:, order(2)), pgarear(:, order(3)), pgarear(:, order(4)), pgarear(:, order(5)), pgarear(:, order(6))];
+else
+    pgarea2 = [pgarear(:, order(1)), pgarear(:, order(2)), pgarear(:, order(3)), pgarear(:, order(4))];
+end
 figure;
 h = area(pgarea2(trange, frange));
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 hold on;
 %plot(fact, sum([pgarea2(trange, :), pgarear(trange, 7)], 2), 'Color', [1 0.54 0], 'LineWidth', 2); % ess
@@ -187,15 +216,23 @@ if opt.saveit
 end
 close;
 
-gmaxarp = [gmaxar(:, order(1)), gmaxar(:, order(2)), gmaxar(:, order(3)), gmaxar(:, order(4)), gmaxar(:, order(5)), gmaxar(:, order(6))];
+if length(order) > 5
+    gmaxarp = [gmaxar(:, order(1)), gmaxar(:, order(2)), gmaxar(:, order(3)), gmaxar(:, order(4)), gmaxar(:, order(5)), gmaxar(:, order(6))];
+else
+    gmaxarp = [gmaxar(:, order(1)), gmaxar(:, order(2)), gmaxar(:, order(3)), gmaxar(:, order(4))];
+end
 figure;
 h = area(gmaxarp(trange, frange));
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 hold on;
 %plot(fact, sum([pgarea2(trange, :), pgarear(trange, 7)], 2), 'Color', [1 0.54 0], 'LineWidth', 2); % ess
@@ -217,15 +254,23 @@ if opt.saveit
 end
 close;
 
-cpmaxrp = [ucpmaxr(:, order(1)), ucpmaxr(:, order(2)), ucpmaxr(:, order(3)), ucpmaxr(:, order(4)), ucpmaxr(:, order(5)), ucpmaxr(:, order(6))];
+if length(order) > 5
+    cpmaxrp = [ucpmaxr(:, order(1)), ucpmaxr(:, order(2)), ucpmaxr(:, order(3)), ucpmaxr(:, order(4)), ucpmaxr(:, order(5)), ucpmaxr(:, order(6))];
+else
+    cpmaxrp = [ucpmaxr(:, order(1)), ucpmaxr(:, order(2)), ucpmaxr(:, order(3)), ucpmaxr(:, order(4))];
+end
 figure;
 h = area(cpmaxrp(trange, frange));
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 %v = axis;
 %v(1:2) = [fact(1) fact(end)];
@@ -244,15 +289,23 @@ if opt.saveit
 end
 close;
 
-pgarea2s2 = [pgarears2(:, order(1)), pgarears2(:, order(2)), pgarears2(:, order(3)), pgarears2(:, order(4)), pgarears2(:, order(5)), pgarears2(:, order(6))];
+if length(order) > 5
+    pgarea2s2 = [pgarears2(:, order(1)), pgarears2(:, order(2)), pgarears2(:, order(3)), pgarears2(:, order(4)), pgarears2(:, order(5)), pgarears2(:, order(6))];
+else
+    pgarea2s2 = [pgarears2(:, order(1)), pgarears2(:, order(2)), pgarears2(:, order(3)), pgarears2(:, order(4))];
+end
 figure;
 h = area(pgarea2s2(trange, frange));
-set(h(1),'FaceColor', color(order(1), :))
-set(h(2),'FaceColor', color(order(2), :))
-set(h(3),'FaceColor', color(order(3), :))
-set(h(4),'FaceColor', color(order(4), :))
-set(h(5),'FaceColor', color(order(5), :))
-set(h(6),'FaceColor', color(order(6), :))
+for i=1:length(order)
+    set(h(i),'FaceColor', color(order(i), :))
+end
+%set(h(1),'FaceColor', color(order(1), :))
+%set(h(2),'FaceColor', color(order(2), :))
+%set(h(3),'FaceColor', color(order(3), :))
+%set(h(4),'FaceColor', color(order(4), :))
+%set(h(5),'FaceColor', color(order(5), :))
+%set(h(6),'FaceColor', color(order(6), :))
+
 %set(h(7),'FaceColor',[1 0 0])
 hold on;
 %plot(fact, sum([pgarea2(trange, :), pgarear(trange, 7)], 2), 'Color', [1 0.54 0], 'LineWidth', 2); % ess

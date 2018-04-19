@@ -1,4 +1,4 @@
-function windinpaper(simname, configf)
+function windinpaper(simname, configf, theta)
 % Function to create wind input information for the paper
 % 
 % 2016.02.10
@@ -27,6 +27,10 @@ fn_prefix = sprintf('%s/', savefileplots1);
 
 s1r = load(savefileplots1);         % load results
 s2r = load(savefileress2);
+scale_1_dir = find(theta == 1);
+savefileress1f = sprintf('%s%s/%s_default2_%3.3i/%s/outputs/stage1/000/s1f-data', ...
+    configf.outputs, simname, simname, scale_1_dir, simname);
+savefileress1f
 s2d = load(savefileress1f);
 
 idwind = s1r.idwind;

@@ -1,4 +1,4 @@
-function resplot1_replicate(simname, configf)
+function resplot1_replicate(simname, configf, theta)
 % Function for plot reserves from first stage runs
 %
 % 2016.03.08
@@ -11,7 +11,7 @@ function resplot1_replicate(simname, configf)
 %configf = configfraptor2;           % raptor new file scheme
 
 %simnamesct = {'10'};
-outputdir = sprintf('%s%s/', configf.outputs, simname);
+outputdir = sprintf('%s%s/outputs/', configf.outputs, simname);
 %nOut = 15;
 nOut = 17;
 %simname = sprintf('%s%s', simnameroot, simnamesct{1});
@@ -23,9 +23,12 @@ nOut = 17;
     savefiletrs2, savefiletrs2f] = deal(outArgs{:});
 
 rs = load(sprintf('%s.mat', savefiles1));
+scale_1_dir = find(theta == 1);
+savefiles1f = sprintf('%s%s/%s_default2_%3.3i/%s/workdir/stage1/000/results_fr_000', ...
+    configf.outputs, simname, simname, scale_1_dir, simname);
 rd = load(sprintf('%s.mat', savefiles1f));
 ss = load(sprintf('%s.mat', savefileress1));
-sd = load(sprintf('%s.mat', savefileress1f));
+%sd = load(sprintf('%s.mat', savefileress1f));
 
 ng = size(rs.r1.mpc.gen, 1);
 ig = find(~isload(rs.r1.mpc.gen));  % generators
@@ -52,7 +55,8 @@ Rsk0 = Gmaxk0 - ePg;
 
 Rd = zeros(size(Rs));               % deterministic reserves
 for t = 1:nt
-    Rd(:, t) = rd.r1f.FixedReserves(t).R;
+    %Rd(:, t) = rd.r1f.FixedReserves(t).R;
+    Rd(:, t) = rd.r1f.flow(t).mpc.reserves.R;
 end
 
 figure

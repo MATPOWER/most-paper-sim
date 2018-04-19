@@ -104,11 +104,16 @@ if r{3} == 1 && idx == 1
 	          fprintf('/  \\  /  \\  /  \\  /  \\  /  DC MP SOPF  \\  /  \\  /  \\  /  \\  /  \\\n');
 	          fprintf('    \\/    \\/    \\/    \\/                \\/    \\/    \\/    \\/\n');
 	          fprintf('==================================\n');
-	        end
-	        r1 = most(second_stage.mpsd, mpopt1);
-         %   saved_r1 = load(sprintf('%s.mat', savefiles1));
-		%r1 = saved_r1.r1;
-	        save(sprintf('%s.mat', savefiles1));% save first stage results
+            end
+            if exist([savefiles1 '.mat'], 'file')
+                saved_r1 = load(sprintf('%s.mat', savefiles1));
+                r1 = saved_r1.r1;
+            else
+                define_constants;
+                r1 = most(second_stage.mpsd, mpopt1);
+                save(sprintf('%s.mat', savefiles1));% save first stage results
+            end
+	        
 	    elseif r{1} == 2
 	        if roptf.verbose
 	          fprintf('\n');
@@ -118,10 +123,14 @@ if r{3} == 1 && idx == 1
 	          fprintf('==================================\n');
 	        end
 	        %r1f = mpsopfl_fixed_res(mpsdf);% call the first stage
-	        r1f = most(second_stage.mpsdf, mpopt1f);
-            %saved_r1 = load(sprintf('%s.mat', savefiles1f));
-		%r1f = saved_r1.r1f;
-	        save(sprintf('%s', savefiles1f));% save first stage results
+            if exist([savefiles1f '.mat'], 'file')
+                saved_r1 = load(sprintf('%s.mat', savefiles1f));
+                r1f = saved_r1.r1f;
+            else
+                define_constants;
+                r1f = most(second_stage.mpsdf, mpopt1f);
+                save(sprintf('%s.mat', savefiles1f));% save first stage results
+            end
 	    end
     end
 else
@@ -167,7 +176,8 @@ if r{1} == 1 && r{2} == 1
 
 elseif r{1} == 2
   r1fa = r1f;
-  r1fa.FixedReserves(idx, 1, 1).req = u.req0(:, idx);% adjust reserves requirements to lower value
+  %r1fa.FixedReserves(idx, 1, 1).req = u.req0(:, idx);% adjust reserves requirements to lower value
+  r1fa.flow(idx, 1, 1).mpc.reserves.req = u.req0(:, idx);
   mpc2_val = mpsetfs2(second_stage.mpsdf, r1fa, r2, idx, second_stage.contabtf(idx).vals);
   [results_val, success_val] = runopf_w_res(mpc2_val, mpopt2f);
   xgd_val = [];

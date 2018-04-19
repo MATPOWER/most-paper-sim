@@ -65,7 +65,8 @@ if r{1} == 1 && r{2} == 1
 	mpopt2 = mpoption('verbose', 0, 'out.all', 0);
 	mpopt2 = mpoption(mpopt2, 'opf.violation', 5e-7);
 	mpopt2 = mpoption(mpopt2, 'most.solver', 'GUROBI');
-
+    mpopt2 = mpoption(mpopt2, 'opf.dc.solver', 'GUROBI');
+    
 	%mpopt2 = mpoption(mpopt2, 'cplex.opts.threads', num_threads);
 	%mpopt2 = mpoption(mpopt2, 'cplex.opts.lpmethod', 4);
 	%mpopt2 = mpoption(mpopt2, 'cplex.opts.qpmethod', 3);

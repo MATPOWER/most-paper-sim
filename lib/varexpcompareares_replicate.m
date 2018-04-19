@@ -33,6 +33,7 @@ function varexpcompareares_replicate(simname, configf, theta_info)
 %ct2 = 2;
 %simname = sprintf('%s%s', simnameroot, varint{ct2});
 simnamepath = sprintf('%s%s', configf.outputs, simname);
+save_dir = sprintf('%s%s/outputs/', configf.outputs, simname);
 
 %legend1 = {'[0.6-1.2] 7 points, 500 tr'};
 legend1 = {'[0.6-1.2] 25 points, 500 tr'};
@@ -40,7 +41,7 @@ legend1 = {'[0.6-1.2] 25 points, 500 tr'};
 vval = [1.5e6 3e6;
       .1e5 7e5];                    % determine yaxis so they are consistent
 
-plot_setup
+plot_setup()
 
 sto = 1;                            % location of stochasti runs
 det = 2;                            % location of deterministic runs
@@ -104,7 +105,7 @@ end
 for ct= 1:length(stackplots)          % create a plot for each component of the cost
   % --------
   fig=figure;                         % deterministic
-  nom = sprintf('%sc118%s_stackfres_rep', configf.outputs, stackname{ct});
+  nom = sprintf('%sc118%s_stackfres_rep', save_dir, stackname{ct});
   eval(sprintf('h = area(theta1, transpose(table%s2([Ecost, Rcost, Lcost, R2cost, UCcost], :)));', stackname{ct}));
   set(h(1),'FaceColor',[0.8 0 0])   % fcost 1
   set(h(2),'FaceColor',[0 0 1])     % rcost 4
@@ -128,7 +129,7 @@ for ct= 1:length(stackplots)          % create a plot for each component of the 
 %  close
 
   fig=figure;                       % stochastic
-  nom = sprintf('%sc118%s_stackfresh_rep', configf.outputs, stackname{ct});
+  nom = sprintf('%sc118%s_stackfresh_rep', save_dir, stackname{ct});
   subplot(1, 2, 1, 'align');
   infobar = eval(sprintf('table%s1([Ecost, Rcost, Lcost, R2cost, UCcost], :)', stackname{ct}));
   infobar(length(infobar), 2) = 0;
@@ -187,7 +188,7 @@ for ct= 1:length(stackplots)          % create a plot for each component of the 
 %  close
 
   fig=figure;                       % stochastic
-  nom = sprintf('%sc118%s_stackfresv_rep', configf.outputs, stackname{ct});
+  nom = sprintf('%sc118%s_stackfresv_rep', save_dir, stackname{ct});
   subplot(2, 1, 1, 'align');
   infobar = eval(sprintf('table%s1([Ecost, Rcost, Lcost, R2cost, UCcost], :)', stackname{ct}));
   infobar(length(infobar), 2) = 0;

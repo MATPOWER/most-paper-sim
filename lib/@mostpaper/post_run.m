@@ -35,7 +35,7 @@ runs2compare{group}.GroupParam = res_criteria_param{1};
 group = group + 1;
 
 compfxst2va_replicate(simname, config, runs2compare);
-windinpaper(simname, config);
+windinpaper(simname, config, theta);
 varexpcompareares_replicate(simname, config, theta_info);
-resplot1_replicate(simname, config);
+resplot1_replicate(simname, config, theta);
 respgplots_replicate(simname, config, theta_info)
