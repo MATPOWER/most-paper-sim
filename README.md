@@ -47,6 +47,10 @@ Before you can run these simulations, you will need to do the following steps to
 Testing Your Installation
 -------------------------
 
+To test your installation and make sure everything is working properly, we
+have provided a small 9-bus test case, with only 4 different reserve levels for
+the deterministic case, and only 2 realizations to test each unit commitment.
+
 At the MATLAB prompt, type:
 
     >> sim = mostpaper().run('testsim9');
@@ -55,9 +59,22 @@ At the MATLAB prompt, type:
 Running the Simulations
 -----------------------
 
-At the MATLAB prompt, type:
+To run the full 118 bus case used for the simulations in the paper, at the
+MATLAB prompt, type:
 
     >> sim = mostpaper().run('sim118');
+
+By default, this runs a reduced version of the simulations, again with only 4
+different reserve levels for the deterministic case, and only 2 realizations
+to test each unit commitment.
+
+To run the full set of simulations used to generate the results described in
+the paper, with 25 different reserve levels for the deterministic case, and
+500 realizations to test each unit commitment, at the MATLAB prompt, type:
+
+    >> sim = mostpaper().run('sim118', 'R', [2 25 500]);
+
+Be prepared for this run to take hours to complete.
 
 
 License and Terms of Use
