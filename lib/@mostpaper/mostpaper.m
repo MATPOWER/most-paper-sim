@@ -15,7 +15,7 @@ classdef mostpaper < mpsim
             sim.l = 1;              %% l, length of simulation time step
             sim.units = 'periods';  %% units of l, length of time step
             sim.T = 24;             %% T, number of simulation periods per run
-            sim.R = [2, 4, 4];   %% R, dimension(s) of simulation runs
+            sim.R = [2, 4, 2];   %% R, dimension(s) of simulation runs
             
             %% create and register process objects
             sim.register_process(solver(...
