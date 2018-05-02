@@ -140,7 +140,7 @@ if (r{1} == 1 && r{2} == 1) || r{1} == 2
 	% see question modify loadcase to understand function handles?
 	current_path = pwd;
 	casef_path = sprintf('%s/stage1/%3.3i/%3.3i/s1', sim_inputdir, name_setup.savetr, name_setup.s1cont);
-	mpcr = feval_w_path_mpsim(casef_path, 'mpc');
+	mpcr = feval_w_path_mpsim(casef_path, 'mpcase');
 	mpc = loadcase(mpcr);
 	mpc = idx_fuel(mpc);
 	mpc0 = mpc;
