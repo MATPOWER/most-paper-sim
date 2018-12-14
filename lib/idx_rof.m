@@ -17,6 +17,12 @@ function [CRPPOS, QRPPOS, CRPNEG, QRPNEG, DCPPOS, DCPNEG, CRPPOS2, ...
 % 2014.04.12
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2014-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 %% define the indices for  power information
 CRPPOS  = 1;        % Cost of positive reserves ($)
 QRPPOS  = 2;        % Quantity of positive reserves

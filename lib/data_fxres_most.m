@@ -43,6 +43,12 @@ function varargout = data_fxres_most(mpfix, optd, ntraj, prob2)
 % revenues from reserves. The genXxx variables contain the reserve costs as
 % opposed to the revenues obtained by participants.
 
+%   MOST Paper Simulations
+%   Copyright (c) 2014-2018 by Daniel Munoz-Alvarez, Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 if nargin < 2
   optd.saveit = 1;
   optd.savepath = [];

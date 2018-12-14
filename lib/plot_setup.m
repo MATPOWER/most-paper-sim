@@ -1,6 +1,12 @@
 function plot_setup()
 % Plots setup: Run after loading data and before plotting
 
+%   MOST Paper Simulations
+%   Copyright (c) 2016-2018 by Haeyong Shin, Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 %factor = 0.7;
 factor = 0.8;
 font = factor*30;

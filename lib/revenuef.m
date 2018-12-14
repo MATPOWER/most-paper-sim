@@ -17,6 +17,12 @@ function [hh, infop, infol] = revenuef(mpc, res, varargin)
 % 2016.03.09
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2016-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 my_xlabel = 'Period';
 
 ng = res.ng;

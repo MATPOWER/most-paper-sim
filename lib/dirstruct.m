@@ -9,6 +9,12 @@ function [varargout] = dirstruct(configf, simname, savetr, s1cont, s2cont, s1dat
 % Alberto J. Lamadrid
 % 2015.02.03
 
+%   MOST Paper Simulations
+%   Copyright (c) 2015-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 if nargin < 12
   res2namef = 'trajf';              % short name for results of second stage (to save)
   if nargin<11

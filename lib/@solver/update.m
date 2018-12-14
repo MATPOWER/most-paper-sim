@@ -1,13 +1,13 @@
 function [x_ps, sx_updates, out_args] = update(ps, x, u, sim_name, sim_workdir, r, idx)
 %UPDATE @solver/update
 
-%   MP-Sim
-%   Copyright (c) 2016, 2017 by Haeyong Shin, Ray Zimmerman
+%   MOST Paper Simulations
+%   Copyright (c) 2016-2018 by Haeyong Shin, Ray Zimmerman
 %
-%   This file is part of MP-Sim.
+%   This file is part of MOST Paper Simulations.
 %   Covered by the 3-clause BSD License (see LICENSE file for details).
 
- if idx == 1
+if idx == 1
   	x.(ps.name).mpc2 = cell(u.time_periods, 1);
   	x.(ps.name).r2.results = cell(u.time_periods, 1);
   	x.(ps.name).r2.xgd = cell(u.time_periods, 1);

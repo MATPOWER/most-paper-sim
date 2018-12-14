@@ -29,6 +29,12 @@ function compfxst2va_replicate(simname, configf, runs2compare, normGroup, normRu
 % but it also CONTAINS the 'output' folders of all the deterministic runs.
 %**************************************************************************
 
+%   MOST Paper Simulations
+%   Copyright (c) 2015-2018 by Daniel Munoz-Alvarez, Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 if nargin < 5
     normRun = [];
     if nargin < 4

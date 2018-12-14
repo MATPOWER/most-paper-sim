@@ -9,6 +9,12 @@ function mpco = modcase(mpci);
 % Alberto J. Lamadrid
 % 2013.07.24
 
+%   MOST Paper Simulations
+%   Copyright (c) 2013-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 define_constants;
 
 if ~isfield(mpci, 'iess')

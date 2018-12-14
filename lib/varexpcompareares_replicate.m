@@ -13,6 +13,12 @@ function varexpcompareares_replicate(simname, configf, theta_info)
 % 2018.03.01
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2015-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 %configf = configfajl1;              % configuration directory structure files
 %configf = configfraptor2;            % configuration directory structure files
 %configf = configfraptor2;           % configuration directory structure files

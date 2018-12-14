@@ -17,6 +17,13 @@ function [blid, lampbus, lampcbus] = npricesmpf(mpsd)
 %   
 % 2014.02.24
 % Alberto J. Lamadrid
+
+%   MOST Paper Simulations
+%   Copyright (c) 2014-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 define_constants;
 nb = size(mpsd.mpc.bus, 1);
 nt = size(mpsd.tstep, 2);

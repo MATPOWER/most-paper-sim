@@ -5,6 +5,12 @@ function windinpaper(simname, configf, theta)
 % 2018.03.14
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2016-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 %simname = 'tr_c118_500ucr10_3';        % base directory
 %configf = configfajl1;              % configuration directory structure files
 %configf = configfraptor;           % raptor old file scheme

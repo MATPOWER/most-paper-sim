@@ -16,6 +16,12 @@ function mpco = idx_fuel(mpci, opt)
 % Alberto J. Lamadrid
 % 2015.03.11
 
+%   MOST Paper Simulations
+%   Copyright (c) 2015-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 if nargin<2
   opt.saveit = 1;
 end

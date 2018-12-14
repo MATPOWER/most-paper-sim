@@ -102,6 +102,12 @@ function varargout = data_mpsd(mpsd, optd, ntraj, prob2)
 % 2015.05.23
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2015-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 if nargin < 2
   optd.runtype = '1';
   optd.saveit = 1;

@@ -36,6 +36,12 @@ function mpco = mpsetfs2(mpsd, r1, r2, t, modct)
 % Daniel Munoz
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2013-2018 by Daniel Munoz-Alvarez, Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 define_constants;
 [CT_LABEL, CT_PROB, CT_TABLE, CT_TBUS, CT_TGEN, CT_TBRCH, ...
     CT_TAREABUS, CT_TAREAGEN, CT_TAREABRCH, CT_ROW, CT_COL, CT_CHGTYPE, ...

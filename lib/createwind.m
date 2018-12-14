@@ -62,6 +62,12 @@ function wind = createwind(mpci, inp)
 % 2013.05.03
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2013-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 mpc0 = loadcase(mpci);
 
 if nargin<2

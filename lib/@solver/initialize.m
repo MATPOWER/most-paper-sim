@@ -1,10 +1,10 @@
 function x_ps = initialize(ps, x, sim_inputdir)
 %INITIALIZE @solver/initialize
 
-%   MP-Sim
-%   Copyright (c) 2016, 2017 by Haeyong Shin, Ray Zimmerman
+%   MOST Paper Simulations
+%   Copyright (c) 2016-2018 by Haeyong Shin, Ray Zimmerman
 %
-%   This file is part of MP-Sim.
+%   This file is part of MOST Paper Simulations.
 %   Covered by the 3-clause BSD License (see LICENSE file for details).
 
 %mpc2 = cell(mpsd.idx.nt, 1);

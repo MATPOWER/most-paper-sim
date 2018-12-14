@@ -10,6 +10,12 @@ function respgplots_replicate(simname, configf, theta_info)
 % 2018.03.14
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2016-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 %simnameroot = 'tr_c118_500ucr';      % base directory
 outputdir = sprintf('%s%s/outputs/', configf.outputs, simname);
 %dprefix = '/Volumes/Drive 2/shares/alberto/';  % location where plot will be saved

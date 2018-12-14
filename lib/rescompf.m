@@ -4,6 +4,12 @@ function [hh, infop, infol] = rescompf(rs, ss, varargin)
 % 2016.03.14 lax
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2016-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 my_xlabel = 'Period';
 
 opt = struct( ...

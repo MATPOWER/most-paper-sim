@@ -43,6 +43,12 @@ function doplots_hpdcf(mpsd, savedvars, optp)
 % modified 2014.07.21
 % Alberto J. Lamadrid
 
+%   MOST Paper Simulations
+%   Copyright (c) 2014-2018 by Alberto J. Lamadrid
+%
+%   This file is part of MOST Paper Simulations.
+%   Covered by the 3-clause BSD License (see LICENSE file for details).
+
 if nargin < 3
   mpsd = input('base results?\n');
   savedvars = input('Name of data set with save variables?\n');
