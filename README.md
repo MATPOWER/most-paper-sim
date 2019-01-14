@@ -11,7 +11,8 @@ presented in following paper:
 >   A. J. Lamadrid, D. Muñoz-Álvarez, C. E. Murillo-Sánchez, R. D. Zimmerman,
     H. Shin and R. J. Thomas, "Using the MATPOWER Optimal Scheduling Tool to
     Test Power System Operation Methodologies Under Uncertainty," _IEEE
-    Transactions on Sustainable Energy_, **under review**.
+    Transactions on Sustainable Energy_, **early access**.
+    DOI: [10.1109/TSTE.2018.2865454][0].
 
 
 Background
@@ -83,6 +84,7 @@ License and Terms of Use
 The MOST Paper Simulations code is distributed as open-source under the [3-clause BSD license][6].
 
 
+[0]: https://doi.org/10.1109/TSTE.2018.2865454
 [1]: http://www.pserc.cornell.edu/matpower
 [2]: https://github.com/MATPOWER/most
 [3]: https://github.com/MATPOWER/mpsim
