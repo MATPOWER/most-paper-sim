@@ -118,7 +118,7 @@ for t = 1:nt
       nc(t, j) = length(clist);
       k = 2;
       for label = clist'
-%        Istr.flow(t, j, k).mpc = apply_contingency(label, Istr.flow(t, j, 1).mpc, contab);
+%        Istr.flow(t, j, k).mpc = apply_changes(label, Istr.flow(t, j, 1).mpc, contab);
         ii = find( label == contab(:, CT_LABEL) );
         CostWeights(k, j, t) = contab(ii(1), CT_PROB);
 %        Istr.idx.nb(t, j, k) = size(Istr.flow(t, j, k).mpc.bus, 1);

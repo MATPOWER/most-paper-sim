@@ -208,7 +208,7 @@ if (r{1} == 1 && r{2} == 1) || r{1} == 2
 	 	  warning('directory for storing output results created, First run');
 	 	  mpc1 = mpc;
 		  modct = mpsd.tstep(1, 1).OpCondSched(1, 1).tab;
-		  mpc0m = apply_contingency(0, mpc1, modct);
+		  mpc0m = apply_changes(0, mpc1, modct);
 		  define_constants;
 		  mpc0m.gen(mpc0m.gen(:, PMIN) > 0, PMIN) = 0;
 		  %r0 =rundcopf(mpc0m);
@@ -280,7 +280,7 @@ if (r{1} == 1 && r{2} == 1) || r{1} == 2
 	        for m = 1:size(profiles, 1)
 	          modct = apply_profile(profilesf(m), modct);
 	        end
-	        mpcint{t} = apply_contingency(0, mpc, modct{t});
+	        mpcint{t} = apply_changes(0, mpc, modct{t});
 	        mpcint{t}.reserves = reserves;  % add info of reserves
 	        req(:, t) = reqi(:, t);
 	        req0(:, t) = reqi0(:, t);      % original reserve requirement

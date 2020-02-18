@@ -39,7 +39,7 @@ function [mdo, xgdo] = mpsets2(mpsd, r1, r2, t, trajdata, xgd)
 % - Full mpsd is passed (maybe just pass the mpsd for the specific time period considered)
 % - Fields with information of ESS/Wind units are available mpsd.mpc.iwind, mpsd.mpc.iess (even if empty)
 % - dispatches initialized in first period as r1.InitialPg
-% - contingency number is set to 0 in apply_contingency - as incoming label is 0
+% - contingency number is set to 0 in apply_changes - as incoming label is 0
 % - contab table is taken from mpsd.cont(t, js).contab, js =1
 % - Code assumes second stage time periods are equal to first stage periods
 % - Running the problem, there were some nonconvergence issues. Therefore, a check to increase the range was included

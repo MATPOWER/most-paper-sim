@@ -71,7 +71,7 @@ roffer = [
 mpco = offer2mpc(mpco, roffer);
 
 %%----- set modifications from profile -----
-mpco = apply_contingency(0, mpco, modct);
+mpco = apply_changes(0, mpco, modct);
 
 %%----- create constraints for generators and demands -----
 % Compute s2 generation ranges for all generators except wind and
