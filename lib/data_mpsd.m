@@ -526,10 +526,10 @@ Pc(:, :) = mpsd.results.Pc(:, startnt + 1:end);
 Rpp(:, :) = mpsd.results.Rpp(:, startnt + 1:end);
 Rpm(:, :) = mpsd.results.Rpm(:, startnt + 1:end);
 if nt >1
-  Rrp(:, :) = mpsd.results.Rrp(:, startnt + 1:end);
-  Rrm(:, :) = mpsd.results.Rrm(:, startnt + 1:end);
-  Rrplam = mpsd.results.RrpPrices(:, startnt + 1:end);
-  Rrmlam = mpsd.results.RrmPrices(:, startnt + 1:end);
+  Rrp(:, :) = mpsd.results.Rrp(:, startnt + 2:end);
+  Rrm(:, :) = mpsd.results.Rrm(:, startnt + 2:end);
+  Rrplam = mpsd.results.RrpPrices(:, startnt + 2:end);
+  Rrmlam = mpsd.results.RrmPrices(:, startnt + 2:end);
   genRrp(:, :) = Rrp .* Rrplam;
   genRrm(:, :) = Rrm .* Rrmlam;
 else

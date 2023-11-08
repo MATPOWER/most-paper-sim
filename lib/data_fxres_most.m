@@ -436,8 +436,8 @@ resreqt(:, :) = sum(resreq1(optd.reszi, :), 1);  % fixed reserves needed
 if nt >1
   Rrp(:, :) = 0;
   Rrm(:, :) = 0;
-  Rrplam(:, :) = mpfix.results.RrpPrices(:, startnt + 1:end);
-  Rrmlam(:, :) = mpfix.results.RrmPrices(:, startnt + 1:end);
+  Rrplam(:, :) = mpfix.results.RrpPrices(:, startnt + 2:end);
+  Rrmlam(:, :) = mpfix.results.RrmPrices(:, startnt + 2:end);
   genRrp(:, :) = Rrp .* Rrpoffer;
   genRrm(:, :) = Rrm .* Rrmoffer;
   revRrp(:, :) = Rrp .* Rrplam;
