@@ -212,8 +212,8 @@ LNScst = NaN * ones(1, nt);                 % cost of load not served
 Pc = NaN * ones(ng, nt);                    % contracted amounts
 Rpp = NaN * ones(ng, nt);                   % Positive reserves 
 Rpm = NaN * ones(ng, nt);                   % Negative Reserves (contingency)
-Rrp = NaN * ones(ng, nt-1);                 % Positive ramp reserve
-Rrm = NaN * ones(ng, nt-1);                 % Negative Ramp reserve
+Rrp = NaN * ones(ng, nt);                   % Positive ramp reserve
+Rrm = NaN * ones(ng, nt);                   % Negative Ramp reserve
 Sp = NaN * ones(ne, nt);                    % Upper storage bound
 Sm = NaN * ones(ne, nt);                    % lower storage bound
 Rpplam = NaN * ones(ng, nt);
@@ -226,12 +226,12 @@ Gmaxlim = NaN * ones(ng, nt, nj, nc0 + 1);  % upper limits on units
 Gminlim = NaN * ones(ng, nt, nj, nc0 + 1);  % lower limits on units
 Gmaxe = zeros(ng, nt, nj);                  % expected available (pmax) over contingencies
 Gmaxe2 = zeros(ng, nt);                     % expected available (pmax) over scenarios/contingencies
-genRrp = NaN * ones(ng, nt - 1);            % cost of positive ramping
-genRrm = NaN * ones(ng, nt - 1);            % cost of negative ramping
-revRrp = NaN * ones(ng, nt - 1);            % revenue from positive ramping
-revRrm = NaN * ones(ng, nt - 1);            % revenue from negative ramping
-Rrplam = NaN * ones(ng, nt-1);              % prices for ramp, positive
-Rrmlam = NaN * ones(ng, nt-1);              % prices for ramp, negative
+genRrp = NaN * ones(ng, nt);                % cost of positive ramping
+genRrm = NaN * ones(ng, nt);                % cost of negative ramping
+revRrp = NaN * ones(ng, nt);                % revenue from positive ramping
+revRrm = NaN * ones(ng, nt);                % revenue from negative ramping
+Rrplam = NaN * ones(ng, nt);                % prices for ramp, positive
+Rrmlam = NaN * ones(ng, nt);                % prices for ramp, negative
 eStorSt = NaN * ones(ne, nt);               % expected storage state
 eStorPg = NaN * ones(ne, nt);               % expected storage dispatch
 mstorl = NaN * ones(ne, nt);                % min storage level
@@ -421,8 +421,8 @@ for t = 1:nt                        % cycle over time periods
     ucsdcost(:, t) = mpfix.StepProb(t)*mpfix.flow(t,1,1).mpc.gencost(:, SHUTDOWN) .* w;
   end
 end
-Rrpoffer = Rrpoffer(:, 1:end-1);            % remove last period, as no ramping is needed then
-Rrmoffer = Rrmoffer(:, 1:end-1);
+% Rrpoffer = Rrpoffer(:, 1:end-1);            % remove last period, as no ramping is needed then
+% Rrmoffer = Rrmoffer(:, 1:end-1);
 genPcst(:, :) = sum(e2cstP(ig, :));         % expected cost
 genP(:, :) = sum(e2revP(ig, :));            % generators expected revenue
 genE(:, :) = sum(e2revP(ie, :), 1);         % ess expected revenue
@@ -624,7 +624,7 @@ if optd.saveit
     fprintf(fid, '\t=\t%15.2f\n', af*(sum(genP) + sum(sum(genRup(ig, :))) + sum(sum(genRdn(ig, :))) ));
     if nt > 1
       fprintf(fid, '9\tpmt to gens for energy, res, ramp, 2+4+5+6+7   =');
-      fprintf(fid, '\t%15.2f', af*(genP + sum(genRup(ig, :)) + sum(genRdn(ig, :)) + [sum(genRrp(ig, :)), 0] + [sum(genRrm(ig, :)), 0] ));
+      fprintf(fid, '\t%15.2f', af*(genP + sum(genRup(ig, :)) + sum(genRdn(ig, :)) + sum(genRrp(ig, :)) + sum(genRrm(ig, :)) ));
       fprintf(fid, '\t=\t%15.2f\n', af*(sum(genP) + sum(sum(genRup(ig, :))) + sum(sum(genRdn(ig, :))) +sum(sum(genRrp(ig, :))) + sum(sum(genRrm(ig, :))) ));
     end
     fprintf(fid, '10\tpmt from loads for Pd                          =');
